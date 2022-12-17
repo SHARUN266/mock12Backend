@@ -11,9 +11,24 @@ app.get("/",async(req,res)=>{
         const page=req.query.page||1;
         const size=req.query.size||10;
         const sort=req.query.sort||"asc"?1:-1
-        const filter=req.query.filter||"all"
-        const JobList= await (await JobModel.find({role:filter}).sort({postedAt:sort}).skip(((page-1)*size)).limit(size))
-        res.status(200).send(JobList)
+        const filter=req.query.filter||""
+        const search=req.query.search||""
+        //console.log(search)
+        if(filter===""){
+            console.log(search)
+            const JobList= await (await JobModel.find({language:{$regex:search,$options:"i"}}).sort({postedAt:sort}).skip(((page-1)*size)).limit(size))
+            res.status(200).send(JobList)
+
+        }
+        
+        else{
+            console.log(search)
+            const JobList= await  JobModel.find({role:filter,language:{$regex:search,$options:"i"}}).sort({postedAt:sort}).skip(((page-1)*size)).limit(size)
+
+            res.status(200).send(JobList)
+        }
+
+        
 
     }catch(e){
         res.status(404).send("Getting data from mongo db failed")
