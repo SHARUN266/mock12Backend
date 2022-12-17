@@ -2,7 +2,7 @@ const {Schema,model}=require("mongoose")
 
 const JobList=new Schema({
     company:String,
-    postedAt:Date,
+    postedAt:Number,
     city:String,
     location:String,
     role:String,
