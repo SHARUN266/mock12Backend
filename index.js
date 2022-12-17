@@ -12,7 +12,7 @@ app.get("/",async(req,res)=>{
         const size=req.query.size||10;
         const sort=req.query.sort||"asc"?1:-1
         const filter=req.query.filter||"all"
-        const JobList= await (await JobModel.find().sort({postedAt:sort}).skip(((page-1)*size)).limit(size))
+        const JobList= await (await JobModel.find({role:filter}).sort({postedAt:sort}).skip(((page-1)*size)).limit(size))
         res.status(200).send(JobList)
 
     }catch(e){
