@@ -36,9 +36,9 @@ app.get("/",async(req,res)=>{
     
 })
 app.post("/",async(req,res)=>{
-    const {company,postedAt,city,location,role,contract,position,language}=req.body
+    const {company,postedAt,city,location,role,contract,position,language,level}=req.body
     try{
-        let job=new JobModel({company,postedAt,city,location,role,contract,position,language})
+        let job=new JobModel({company,postedAt,city,location,role,contract,position,language,level})
         await job.save()
         res.send(job)
     }catch(e){

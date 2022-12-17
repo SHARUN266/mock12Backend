@@ -6,6 +6,7 @@ const JobList=new Schema({
     city:String,
     location:String,
     role:String,
+    level:String,
     contract:String,
     position:String,
     language:String
